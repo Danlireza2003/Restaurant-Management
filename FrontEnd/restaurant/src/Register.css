@@ -1,0 +1,204 @@
+body, html, #root {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+    url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;}
+  
+  .register-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+    
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; 
+  }
+  .register-container h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  
+  .register-container h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .register-form input {
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    /* --- CORREÇÃO AQUI --- */
+    color: #333333; /* Força a cor do texto digitado para um cinza escuro */
+  }
+  
+  .register-form input:focus {
+    outline: none;
+    border-color: #007bff;
+    background-color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+  }
+  
+  .register-form input::placeholder {
+    color: #6c757d;
+  }
+  
+  .register-btn {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+  }
+  
+  .register-btn:hover {
+    background: linear-gradient(135deg, #0056b3, #004085);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+  }
+  
+  .register-btn:active {
+    transform: translateY(0);
+  }
+  
+  .register-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .redirect-text {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #6c757d;
+    font-size: 0.9rem;
+  }
+  
+  .login-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+  
+  .login-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  
+  .register-container p {
+    text-align: center;
+    margin: 1rem 0;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  
+  
+  @media (max-width: 480px) {
+    .register-container {
+      margin: 0;
+      padding: 1.5rem;
+      width: 85%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .register-container h2 {
+      font-size: 1.5rem;
+    }
+    
+    .register-form input {
+      padding: 10px 14px;
+    }
+  }
+  
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -40%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  .register-container {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  /* Estados de validação */
+  .register-form input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: #dc3545;
+    background-color: #fff5f5;
+  }
+  
+  .register-form input:valid:not(:focus):not(:placeholder-shown) {
+    border-color: #28a745;
+    background-color: #f8fff9;
+  }
+  
+  /* Loading state */
+  .register-btn.loading {
+    position: relative;
+    color: transparent;
+  }
+  
+  .register-btn.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }

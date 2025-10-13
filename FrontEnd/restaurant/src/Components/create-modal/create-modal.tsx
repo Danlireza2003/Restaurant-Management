@@ -23,7 +23,6 @@ const Input = ({ label, value, updateValue }: InputProps) => {
         </>
     )
 }
-
 export function CreateModal({ closeModal }: ModalProps){
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState(0);
@@ -39,6 +38,10 @@ export function CreateModal({ closeModal }: ModalProps){
         }
         mutate(foodData)
     }
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault(); // Previne o recarregamento da página
+        submit();
+    }
 
     useEffect(() => {
         if(!isSuccess) return 
@@ -49,14 +52,15 @@ export function CreateModal({ closeModal }: ModalProps){
         <div className="modal-overlay">
             <div className="modal-body">
                 <h2>Cadastre um novo item no cardápio</h2>
-                <form className="input-container">
+                <form className="input-container" onSubmit={handleSubmit}>
                     <Input label="title" value={title} updateValue={setTitle}/>
                     <Input label="price" value={price} updateValue={setPrice}/>
                     <Input label="image" value={image} updateValue={setImage}/>
+                    <button type="submit" className="btn-secondary">
+                    {isPending ? 'postando...' : 'postar'}
+                    </button>
                 </form>
-                <button onClick={submit} className="btn-secondary">
-                {isPending ? 'postando...' : 'postar'}
-                </button>
+               
             </div>
         </div>
     )
