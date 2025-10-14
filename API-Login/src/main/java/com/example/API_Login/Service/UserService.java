@@ -1,12 +1,13 @@
 package com.example.API_Login.Service;
 
-import com.example.API_Login.User.User;
-import com.example.API_Login.User.UserRepository;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.example.API_Login.User.User;
+import com.example.API_Login.User.UserRepository;
 
 @Service
 public class UserService {
@@ -22,8 +23,8 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Optional<User> findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
     public Optional<User> findById(Long id) {

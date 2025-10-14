@@ -1,21 +1,29 @@
 package com.example.API_Login.FoodController;
-import com.example.API_Login.JWT.JwtResponse;
-import com.example.API_Login.JWT.JwtUtil;
-import com.example.API_Login.User.LoginRequest;
+import java.net.URI;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.example.API_Login.JWT.JwtResponse;
+import com.example.API_Login.JWT.JwtUtil;
 import com.example.API_Login.Service.UserService;
+import com.example.API_Login.User.LoginRequest;
 import com.example.API_Login.User.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.net.URI;
-import java.util.Optional;
 @CrossOrigin(origins = "http://localhost:5173")
 @RestController
 @RequestMapping("/users")
@@ -36,9 +44,9 @@ public class UserController {
     }
 
 
-    @GetMapping("/email/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
-        Optional<User> user = userService.findByEmail(email);
+    @GetMapping("/login/{login}")
+    public ResponseEntity<User> getUserByLogin(@PathVariable String login) {
+        Optional<User> user = userService.findByLogin(login);
         return user.map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -68,8 +76,8 @@ public class UserController {
                     )
             );
 
-            User user = (User) authentication.getPrincipal();
-            String jwt = jwtUtil.generateToken(user);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String jwt = jwtUtil.generateToken(userDetails);
 
             return ResponseEntity.ok(new JwtResponse(jwt));
         } catch (BadCredentialsException e) {
